@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as EventsRouteImport } from './routes/events'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as BecomeAHostRouteImport } from './routes/become-a-host'
 import { Route as AboutRouteImport } from './routes/about'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const EventsRoute = EventsRouteImport.update({
   id: '/events',
   path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoriesRoute = CategoriesRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/become-a-host': typeof BecomeAHostRoute
   '/categories': typeof CategoriesRoute
+  '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/become-a-host': typeof BecomeAHostRoute
   '/categories': typeof CategoriesRoute
+  '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,28 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/become-a-host': typeof BecomeAHostRoute
   '/categories': typeof CategoriesRoute
+  '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/become-a-host' | '/categories' | '/events'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/become-a-host'
+    | '/categories'
+    | '/contact'
+    | '/events'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/become-a-host' | '/categories' | '/events'
-  id: '__root__' | '/' | '/about' | '/become-a-host' | '/categories' | '/events'
+  to: '/' | '/about' | '/become-a-host' | '/categories' | '/contact' | '/events'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/become-a-host'
+    | '/categories'
+    | '/contact'
+    | '/events'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +98,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BecomeAHostRoute: typeof BecomeAHostRoute
   CategoriesRoute: typeof CategoriesRoute
+  ContactRoute: typeof ContactRoute
   EventsRoute: typeof EventsRoute
 }
 
@@ -86,6 +109,13 @@ declare module '@tanstack/react-router' {
       path: '/events'
       fullPath: '/events'
       preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/categories': {
@@ -124,6 +154,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BecomeAHostRoute: BecomeAHostRoute,
   CategoriesRoute: CategoriesRoute,
+  ContactRoute: ContactRoute,
   EventsRoute: EventsRoute,
 }
 export const routeTree = rootRouteImport
