@@ -1,7 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import Lottie from "lottie-react";
+import * as LottieModule from "lottie-react";
 import loaderAnimation from "./loader-lottie.json";
+
+const Lottie = ((LottieModule as unknown as { default?: unknown }).default ??
+  LottieModule) as React.ComponentType<{
+  animationData: unknown;
+  loop?: boolean;
+  className?: string;
+}>;
 
 const MIN_VISIBLE_MS = 650;
 
