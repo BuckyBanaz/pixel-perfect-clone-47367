@@ -6,15 +6,20 @@ import loaderAnimation from "./loader-lottie.json";
 type LottieProps = { animationData: unknown; loop?: boolean; className?: string };
 
 // lottie-react is CJS: the component can sit one or two `default` levels deep.
+function isRenderable(value: unknown): boolean {
+  if (typeof value === "function") return true;
+  return !!value && typeof value === "object" && "$$typeof" in (value as object);
+}
+
 function resolveComponent(mod: unknown): ComponentType<LottieProps> | null {
   let candidate: unknown = mod;
-  for (let i = 0; i < 3; i++) {
-    if (typeof candidate === "function") return candidate as ComponentType<LottieProps>;
+  for (let i = 0; i < 4; i++) {
+    if (i > 0 && isRenderable(candidate)) return candidate as ComponentType<LottieProps>;
     if (candidate && typeof candidate === "object" && "default" in candidate) {
       candidate = (candidate as { default: unknown }).default;
     } else break;
   }
-  return null;
+  return isRenderable(candidate) ? (candidate as ComponentType<LottieProps>) : null;
 }
 
 const Lottie = resolveComponent(LottieModule);
