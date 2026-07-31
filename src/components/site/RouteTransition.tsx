@@ -1,14 +1,23 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ComponentType } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import * as LottieModule from "lottie-react";
 import loaderAnimation from "./loader-lottie.json";
 
-const Lottie = ((LottieModule as unknown as { default?: unknown }).default ??
-  LottieModule) as React.ComponentType<{
-  animationData: unknown;
-  loop?: boolean;
-  className?: string;
-}>;
+type LottieProps = { animationData: unknown; loop?: boolean; className?: string };
+
+// lottie-react is CJS: the component can sit one or two `default` levels deep.
+function resolveComponent(mod: unknown): ComponentType<LottieProps> | null {
+  let candidate: unknown = mod;
+  for (let i = 0; i < 3; i++) {
+    if (typeof candidate === "function") return candidate as ComponentType<LottieProps>;
+    if (candidate && typeof candidate === "object" && "default" in candidate) {
+      candidate = (candidate as { default: unknown }).default;
+    } else break;
+  }
+  return null;
+}
+
+const Lottie = resolveComponent(LottieModule);
 
 const MIN_VISIBLE_MS = 650;
 
