@@ -54,7 +54,11 @@ export function RouteTransition() {
       className="fixed inset-0 z-[100] grid place-items-center bg-background/80 backdrop-blur-sm animate-fade-in"
     >
       <div className="flex flex-col items-center gap-4">
-        <Lottie animationData={loaderAnimation} loop className="size-28 sm:size-32" />
+        {Lottie ? (
+          <Lottie animationData={loaderAnimation} loop className="size-28 sm:size-32" />
+        ) : (
+          <span className="size-28 animate-spin rounded-full border-4 border-cream-deep border-t-rose-accent" />
+        )}
         <span className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
           Loading
         </span>
