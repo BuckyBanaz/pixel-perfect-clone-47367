@@ -414,9 +414,9 @@ function LandingPageRoute() {
         <Newsletter />
         <CtaBand
           title="Your next favourite evening is already on the calendar"
-          body="Join thousands of women meeting over tea, ideas and long tables across the Netherlands."
-          primary={{ to: "/events", label: "Browse events" }}
-          secondary={{ to: "/contact", label: "Talk to us" }}
+          text="Join thousands of women meeting over tea, ideas and long tables across the Netherlands."
+          to="/events"
+          label="Browse events"
         />
       </main>
       <Footer />
