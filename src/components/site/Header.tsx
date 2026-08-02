@@ -1,21 +1,23 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { navLinks } from "./data";
-import { IconFloralMark } from "./icons";
+import { IconWheelMark } from "./icons";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { navItems } from "./nav";
 
 export function Logo({ compact = false }: { compact?: boolean }) {
+  const { t } = useLanguage();
   return (
     <Link to="/" className="flex min-w-0 items-center gap-2.5">
-      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-cream-deep">
-        <IconFloralMark className="size-6 text-rose-accent" />
+      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground">
+        <IconWheelMark className="size-6" />
       </span>
       <span className="min-w-0 leading-tight">
         <span className="block truncate font-serif text-base font-semibold text-foreground sm:text-lg">
-          Events of Women
+          {t.org.short}
         </span>
         {!compact && (
-          <span className="block truncate text-[9px] uppercase tracking-[0.18em] text-muted-foreground sm:text-[10px] sm:tracking-[0.2em]">
-            Connect. Celebrate. Empower.
+          <span className="block truncate text-[9px] uppercase tracking-[0.16em] text-muted-foreground sm:text-[10px]">
+            {t.org.tagline}
           </span>
         )}
       </span>
@@ -23,44 +25,59 @@ export function Logo({ compact = false }: { compact?: boolean }) {
   );
 }
 
+function LangSwitch() {
+  const { lang, setLang } = useLanguage();
+  return (
+    <div className="inline-flex overflow-hidden rounded-full border border-border text-xs font-semibold">
+      {(["nl", "en"] as const).map((l) => (
+        <button
+          key={l}
+          type="button"
+          onClick={() => setLang(l)}
+          aria-pressed={lang === l}
+          className={`px-2.5 py-1.5 uppercase transition ${lang === l ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+        >
+          {l}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/85 backdrop-blur-md">
-      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3.5 sm:px-6 sm:py-4 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-md">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Logo />
 
-        <nav className="hidden items-center gap-6 xl:flex xl:col-start-2 xl:row-start-1">
-          {navLinks.map((n) => (
+        <nav aria-label="Hoofdmenu" className="hidden items-center gap-4 xl:flex">
+          {navItems.filter((n) => n.primary).map((n) => (
             <Link
               key={n.to}
               to={n.to}
               activeOptions={{ exact: n.to === "/" }}
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{
-                className:
-                  "text-sm font-semibold text-foreground underline decoration-rose-accent decoration-2 underline-offset-8",
-              }}
+              activeProps={{ className: "text-sm font-semibold text-foreground underline decoration-flame decoration-2 underline-offset-8" }}
             >
-              {n.label}
+              {t.nav[n.key]}
             </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
+          <LangSwitch />
           <Link
-            to="/become-a-host"
-            className="hidden items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 sm:inline-flex"
+            to="/doneren"
+            className="hidden rounded-full bg-flame px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 sm:inline-flex"
           >
-            Get Started
-            <svg viewBox="0 0 16 16" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" />
-            </svg>
+            {t.common.donate}
           </Link>
           <button
             type="button"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? t.common.close : t.common.menu}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
             className="grid size-10 shrink-0 place-items-center rounded-full border border-border text-foreground xl:hidden"
@@ -73,27 +90,20 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-border/60 bg-background xl:hidden">
+        <div className="max-h-[70vh] overflow-y-auto border-t border-border/60 bg-background xl:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col px-4 py-2 sm:px-6">
-            {navLinks.map((n) => (
+            {navItems.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 onClick={() => setOpen(false)}
                 activeOptions={{ exact: n.to === "/" }}
                 className="border-b border-border/40 py-3 text-sm text-muted-foreground last:border-0"
-                activeProps={{ className: "py-3 text-sm font-semibold text-foreground" }}
+                activeProps={{ className: "border-b border-border/40 py-3 text-sm font-semibold text-foreground" }}
               >
-                {n.label}
+                {t.nav[n.key]}
               </Link>
             ))}
-            <Link
-              to="/become-a-host"
-              onClick={() => setOpen(false)}
-              className="my-3 inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground sm:hidden"
-            >
-              Get Started
-            </Link>
           </nav>
         </div>
       )}
