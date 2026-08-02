@@ -9,8 +9,81 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VrouwenJongerenRouteImport } from './routes/vrouwen-jongeren'
+import { Route as VrijwilligersRouteImport } from './routes/vrijwilligers'
+import { Route as ProjectenRouteImport } from './routes/projecten'
+import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as OverOnsRouteImport } from './routes/over-ons'
+import { Route as NieuwsRouteImport } from './routes/nieuws'
+import { Route as MissieVisieRouteImport } from './routes/missie-visie'
+import { Route as KennisbankRouteImport } from './routes/kennisbank'
+import { Route as InternationaleSamenwerkingRouteImport } from './routes/internationale-samenwerking'
+import { Route as EvenementenRouteImport } from './routes/evenementen'
+import { Route as DonerenRouteImport } from './routes/doneren'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VrouwenJongerenRoute = VrouwenJongerenRouteImport.update({
+  id: '/vrouwen-jongeren',
+  path: '/vrouwen-jongeren',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VrijwilligersRoute = VrijwilligersRouteImport.update({
+  id: '/vrijwilligers',
+  path: '/vrijwilligers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectenRoute = ProjectenRouteImport.update({
+  id: '/projecten',
+  path: '/projecten',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OverOnsRoute = OverOnsRouteImport.update({
+  id: '/over-ons',
+  path: '/over-ons',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NieuwsRoute = NieuwsRouteImport.update({
+  id: '/nieuws',
+  path: '/nieuws',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissieVisieRoute = MissieVisieRouteImport.update({
+  id: '/missie-visie',
+  path: '/missie-visie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KennisbankRoute = KennisbankRouteImport.update({
+  id: '/kennisbank',
+  path: '/kennisbank',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InternationaleSamenwerkingRoute =
+  InternationaleSamenwerkingRouteImport.update({
+    id: '/internationale-samenwerking',
+    path: '/internationale-samenwerking',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EvenementenRoute = EvenementenRouteImport.update({
+  id: '/evenementen',
+  path: '/evenementen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonerenRoute = DonerenRouteImport.update({
+  id: '/doneren',
+  path: '/doneren',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +92,200 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/doneren': typeof DonerenRoute
+  '/evenementen': typeof EvenementenRoute
+  '/internationale-samenwerking': typeof InternationaleSamenwerkingRoute
+  '/kennisbank': typeof KennisbankRoute
+  '/missie-visie': typeof MissieVisieRoute
+  '/nieuws': typeof NieuwsRoute
+  '/over-ons': typeof OverOnsRoute
+  '/partners': typeof PartnersRoute
+  '/projecten': typeof ProjectenRoute
+  '/vrijwilligers': typeof VrijwilligersRoute
+  '/vrouwen-jongeren': typeof VrouwenJongerenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/doneren': typeof DonerenRoute
+  '/evenementen': typeof EvenementenRoute
+  '/internationale-samenwerking': typeof InternationaleSamenwerkingRoute
+  '/kennisbank': typeof KennisbankRoute
+  '/missie-visie': typeof MissieVisieRoute
+  '/nieuws': typeof NieuwsRoute
+  '/over-ons': typeof OverOnsRoute
+  '/partners': typeof PartnersRoute
+  '/projecten': typeof ProjectenRoute
+  '/vrijwilligers': typeof VrijwilligersRoute
+  '/vrouwen-jongeren': typeof VrouwenJongerenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/doneren': typeof DonerenRoute
+  '/evenementen': typeof EvenementenRoute
+  '/internationale-samenwerking': typeof InternationaleSamenwerkingRoute
+  '/kennisbank': typeof KennisbankRoute
+  '/missie-visie': typeof MissieVisieRoute
+  '/nieuws': typeof NieuwsRoute
+  '/over-ons': typeof OverOnsRoute
+  '/partners': typeof PartnersRoute
+  '/projecten': typeof ProjectenRoute
+  '/vrijwilligers': typeof VrijwilligersRoute
+  '/vrouwen-jongeren': typeof VrouwenJongerenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contact'
+    | '/doneren'
+    | '/evenementen'
+    | '/internationale-samenwerking'
+    | '/kennisbank'
+    | '/missie-visie'
+    | '/nieuws'
+    | '/over-ons'
+    | '/partners'
+    | '/projecten'
+    | '/vrijwilligers'
+    | '/vrouwen-jongeren'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contact'
+    | '/doneren'
+    | '/evenementen'
+    | '/internationale-samenwerking'
+    | '/kennisbank'
+    | '/missie-visie'
+    | '/nieuws'
+    | '/over-ons'
+    | '/partners'
+    | '/projecten'
+    | '/vrijwilligers'
+    | '/vrouwen-jongeren'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/doneren'
+    | '/evenementen'
+    | '/internationale-samenwerking'
+    | '/kennisbank'
+    | '/missie-visie'
+    | '/nieuws'
+    | '/over-ons'
+    | '/partners'
+    | '/projecten'
+    | '/vrijwilligers'
+    | '/vrouwen-jongeren'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
+  DonerenRoute: typeof DonerenRoute
+  EvenementenRoute: typeof EvenementenRoute
+  InternationaleSamenwerkingRoute: typeof InternationaleSamenwerkingRoute
+  KennisbankRoute: typeof KennisbankRoute
+  MissieVisieRoute: typeof MissieVisieRoute
+  NieuwsRoute: typeof NieuwsRoute
+  OverOnsRoute: typeof OverOnsRoute
+  PartnersRoute: typeof PartnersRoute
+  ProjectenRoute: typeof ProjectenRoute
+  VrijwilligersRoute: typeof VrijwilligersRoute
+  VrouwenJongerenRoute: typeof VrouwenJongerenRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vrouwen-jongeren': {
+      id: '/vrouwen-jongeren'
+      path: '/vrouwen-jongeren'
+      fullPath: '/vrouwen-jongeren'
+      preLoaderRoute: typeof VrouwenJongerenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vrijwilligers': {
+      id: '/vrijwilligers'
+      path: '/vrijwilligers'
+      fullPath: '/vrijwilligers'
+      preLoaderRoute: typeof VrijwilligersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projecten': {
+      id: '/projecten'
+      path: '/projecten'
+      fullPath: '/projecten'
+      preLoaderRoute: typeof ProjectenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/over-ons': {
+      id: '/over-ons'
+      path: '/over-ons'
+      fullPath: '/over-ons'
+      preLoaderRoute: typeof OverOnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nieuws': {
+      id: '/nieuws'
+      path: '/nieuws'
+      fullPath: '/nieuws'
+      preLoaderRoute: typeof NieuwsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/missie-visie': {
+      id: '/missie-visie'
+      path: '/missie-visie'
+      fullPath: '/missie-visie'
+      preLoaderRoute: typeof MissieVisieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kennisbank': {
+      id: '/kennisbank'
+      path: '/kennisbank'
+      fullPath: '/kennisbank'
+      preLoaderRoute: typeof KennisbankRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/internationale-samenwerking': {
+      id: '/internationale-samenwerking'
+      path: '/internationale-samenwerking'
+      fullPath: '/internationale-samenwerking'
+      preLoaderRoute: typeof InternationaleSamenwerkingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evenementen': {
+      id: '/evenementen'
+      path: '/evenementen'
+      fullPath: '/evenementen'
+      preLoaderRoute: typeof EvenementenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/doneren': {
+      id: '/doneren'
+      path: '/doneren'
+      fullPath: '/doneren'
+      preLoaderRoute: typeof DonerenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +298,18 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
+  DonerenRoute: DonerenRoute,
+  EvenementenRoute: EvenementenRoute,
+  InternationaleSamenwerkingRoute: InternationaleSamenwerkingRoute,
+  KennisbankRoute: KennisbankRoute,
+  MissieVisieRoute: MissieVisieRoute,
+  NieuwsRoute: NieuwsRoute,
+  OverOnsRoute: OverOnsRoute,
+  PartnersRoute: PartnersRoute,
+  ProjectenRoute: ProjectenRoute,
+  VrijwilligersRoute: VrijwilligersRoute,
+  VrouwenJongerenRoute: VrouwenJongerenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

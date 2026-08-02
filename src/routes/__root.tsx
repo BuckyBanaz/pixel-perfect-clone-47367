@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { RouteTransition } from "../components/site/RouteTransition";
+import { LanguageProvider } from "../i18n/LanguageProvider";
 
 function NotFoundComponent() {
   return (
@@ -78,24 +79,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Events of Women — Curated Events For Women" },
-      { name: "description", content: "From tea parties to workshops and networking meets, discover meaningful events crafted exclusively for women. Connect. Celebrate. Empower." },
-      { name: "author", content: "Events of Women" },
-      { property: "og:title", content: "Events of Women — Curated Events For Women" },
-      { property: "og:description", content: "From tea parties to workshops and networking meets, discover meaningful events crafted exclusively for women. Connect. Celebrate. Empower." },
+      { title: "Stichting Zurali Chej — Roma- en Sinti-vrouwen en jongeren" },
+      { name: "description", content: "Door Roma geleide stichting in Nederland, actief in heel Europa. Empowerment, belangenbehartiging, educatie, bewustwording en internationale samenwerking." },
+      { name: "author", content: "Stichting Zurali Chej" },
+      { property: "og:site_name", content: "Stichting Zurali Chej" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Events of Women — Curated Events For Women" },
-      { name: "twitter:description", content: "From tea parties to workshops and networking meets, discover meaningful events crafted exclusively for women. Connect. Celebrate. Empower." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/623a4991-6cec-413d-93f0-827dad10e714/id-preview-8945bc7e--21d69de4-706a-407e-b082-221c5ea0dedb.lovable.app-1785324755476.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/623a4991-6cec-413d-93f0-827dad10e714/id-preview-8945bc7e--21d69de4-706a-407e-b082-221c5ea0dedb.lovable.app-1785324755476.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Karla:wght@400;500;600;700&family=Caveat:wght@600&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Karla:wght@400;500;600;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -106,7 +102,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="nl">
       <head>
         <HeadContent />
       </head>
@@ -123,9 +119,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <LanguageProvider>
       <RouteTransition />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }
